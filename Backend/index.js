@@ -15,7 +15,7 @@ app.use(cors());
 
 const io = new Server(server, {
     cors: {
-        origin: "http://192.168.1.6:3000",
+        origin: "https://onlinegame-zrsv.onrender.com",
         methods: ["GET", "POST"]
     },
 });

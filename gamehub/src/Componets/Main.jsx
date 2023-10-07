@@ -35,34 +35,34 @@ const Main = ({ setvisible, room, socket }) => {
 
     const winning = () => {
         if (val1 !== "" && val1 === val2 && val2 === val3) {
-            return alert(whowin," win") & setvisible(true);
+            return alert(whowin +" win") & setvisible(true);
         }
         if (val4 !== "" && val4 === val5 && val5 === val6) {
-            return alert(whowin," win") & setvisible(true);
+            return alert(whowin +" win") & setvisible(true);
 
         }
         if (val7 !== "" && val7 === val8 && val8 === val9) {
-            return alert(whowin," win") & setvisible(true);
+            return alert(whowin +" win") & setvisible(true);
 
         }
         if (val1 !== "" && val1 === val4 && val4 === val7) {
-            return alert(whowin," win") & setvisible(true);
+            return alert(whowin +" win") & setvisible(true);
 
         }
         if (val2 !== "" && val2 === val5 && val5 === val8) {
-            return alert(whowin," win") & setvisible(true);
+            return alert(whowin +" win") & setvisible(true);
 
         }
         if (val3 !== "" && val3 === val6 && val6 === val9) {
-            return alert(whowin," win") & setvisible(true);
+            return alert(whowin +" win") & setvisible(true);
 
         }
         if (val1 !== "" && val1 === val5 && val5 === val9) {
-            return alert(whowin," win") & setvisible(true);
+            return alert(whowin + " win") & setvisible(true);
 
         }
         if (val3 !== "" && val3 === val5 && val5 === val7) {
-            return alert(whowin," win") & setvisible(true);
+            return alert(whowin + " win") & setvisible(true);
 
         }if(count===8) {
           return alert("Match Draw") & setvisible(true); 
