@@ -6,10 +6,31 @@ roomName:{
     required: true,
     unique: true
 }, 
+
 users:[
     {
-            type: String,
+        type: mongoose.Schema.Types.ObjectId,
             ref: 'USER'   
+    }
+],
+Game:[{
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'USER'
+    },
+    position:{
+        type:String
+    }
+}],
+messages:[
+    {
+        user:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'USER'
+        },
+        text:{
+            type:String
+        }
     }
 ],
 expired:{

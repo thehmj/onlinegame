@@ -11,7 +11,7 @@ import { Navigate } from "react-router-dom";
 
 
 const PrivateRouting = ({children})=>{
-    const isUserLoggedIn = window.localStorage.getItem('username') || false;
+    const isUserLoggedIn = window.localStorage.getItem('token') || false;
     const isAuthPages = window.location.pathname.includes('signin') || window.location.pathname.includes('signup')
     if (!isUserLoggedIn && isAuthPages) {
         return children;

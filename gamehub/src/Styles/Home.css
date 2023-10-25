@@ -3,7 +3,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    /* width: 80%; */
 }
+.center2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    width: 80%;
+}
+
 
 input {
     margin-bottom: 20px;
@@ -39,4 +48,99 @@ button {
 
 .buttongap button{
     margin: 5px;
+}
+.main2{
+    display: flex;
+    flex-wrap: wrap;
+    /* grid-template-columns: repeat(auto-fill, 900px); */
+}
+.chatpannel{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid black;
+
+}
+.placeholder{
+    color: rgba(0, 0, 0, 0.093);
+    height: 100%;
+    font-weight:500;
+    font-family: cursive;
+    
+}
+.chatbox{
+    position: relative;
+    height: 80vh;  
+    border-bottom: 1px solid ;
+}
+.messagebox{
+ width: 100%;
+ /* border: 1px solid blue; */
+ position: absolute;
+ /* display: flex; */
+ 
+ bottom: 0;
+
+}
+.messagecontainer{
+    /* height: 20px; */
+    margin: 1px;
+    padding: 2px;
+    display: flex;
+}
+.messages{
+    font-weight: 500;
+    font-family: cursive;
+    width: 98%;
+    /* text-align-last: right; */
+
+    /* text-align: right; */
+    /* font-size: larger; */
+    /* margin-bottom: 2px; */
+}
+.leftright{
+    display: flex;
+}
+.messageinput{
+    /* height: 10vh; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.textmsg{
+    width: 90%;
+}
+.button1{
+    color: rgb(22, 6, 6);
+    background-color: rgb(22, 6, 6);
+    color: rgb(15, 180, 15);
+    font-weight: 600;
+    /* background-color: rgb(15, 180, 15); */
+    width: 90%;
+    border: none;
+    font-size: larger;
+    padding: 2px;
+    border-radius: 12px;
+    align-self: center;
+}
+.button1:hover{
+    transform: scale(1.01);
+}
+.logout{
+   
+    margin: 20px;
+    padding: 6px;
+    position: absolute;
+    bottom: 0;
+
+
+    background-color: rgb(15, 180, 15);
+    color:  rgb(22, 6, 6);
+    font-size: larger;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    align-self: center;
 }
