@@ -51,7 +51,7 @@ gettime();
             <h1>Tic-Tac-Toe</h1>
 
             <div >
-                <p style={{ fontSize: "1.2rem" }} id="enterName"> {greet} {Name} </p>
+                <p style={{ fontSize: "1.2rem" }} id="enterName"> {greet} {Name.split(" ")[0]} </p>
                 <p style={{ fontSize: "1.2rem" }} id="enterName"> Join a room to play </p>
 
 

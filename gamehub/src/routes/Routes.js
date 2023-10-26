@@ -27,13 +27,14 @@ const PrivateRouting = ({children})=>{
 }
 
 const Routes = () => {
+const backendurl = "https://backend-of-game.onrender.com";
+// const backendurl = "http://localhost:5000";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <> 
-        <Route path="/" element={<PrivateRouting><Landing/></PrivateRouting> }></Route>
-        <Route path="/signin" element={<PrivateRouting><Signin/></PrivateRouting>}></Route>
-
+        <Route path="/" element={<PrivateRouting><Landing url={backendurl} /></PrivateRouting> }></Route>
+        <Route path="/signin" element={<PrivateRouting><Signin url={backendurl}/></PrivateRouting>}></Route>
         </>
     )
 );

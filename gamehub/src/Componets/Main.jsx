@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import '../Styles/Home.css';
 // import { io } from "socket.io-client";
-
+import { Oval } from "react-loader-spinner";
 
 const Main = ({ setvisible, room, socket }) => {
-
+    const ratio = window.innerHeight / window.innerWidth;
     const [chance, setchance] = useState("X");
     const [waiting, setwating] = useState(true);
     const [opponent, setopponent] = useState("");
@@ -14,6 +14,7 @@ const Main = ({ setvisible, room, socket }) => {
     const [count, setcount] = useState(0);
     const [textmessage, settextmessage] = useState("");
     const [message, SetMessages] = useState([]);
+    const [displaydata, setdisplaydata] = useState("");
 
 
     const Name = localStorage.getItem("Name");
@@ -34,44 +35,47 @@ const Main = ({ setvisible, room, socket }) => {
         if (run) {
             winning();
         }
-        console.log(userval, "rrrrrrrrrrr");
         setrun(true);
         // eslint-disable-next-line
     }, [val1, val2, val3, val4, val5, val6, val7, val8, val9]);
 
+    const alert2 = (data) => {
+        setdisplaydata(data);
+    }
+
     const winning = () => {
         if (val1 !== "" && val1 === val2 && val2 === val3) {
-            return alert(whowin + " win") & setvisible(true);
+            return alert2(whowin + " win")
         }
         if (val4 !== "" && val4 === val5 && val5 === val6) {
-            return alert(whowin + " win") & setvisible(true);
+            return alert2(whowin + " win")
 
         }
         if (val7 !== "" && val7 === val8 && val8 === val9) {
-            return alert(whowin + " win") & setvisible(true);
+            return alert2(whowin + " win")
 
         }
         if (val1 !== "" && val1 === val4 && val4 === val7) {
-            return alert(whowin + " win") & setvisible(true);
+            return alert2(whowin + " win")
 
         }
         if (val2 !== "" && val2 === val5 && val5 === val8) {
-            return alert(whowin + " win") & setvisible(true);
+            return alert2(whowin + " win")
 
         }
         if (val3 !== "" && val3 === val6 && val6 === val9) {
-            return alert(whowin + " win") & setvisible(true);
+            return alert2(whowin + " win")
 
         }
         if (val1 !== "" && val1 === val5 && val5 === val9) {
-            return alert(whowin + " win") & setvisible(true);
+            return alert2(whowin + " win")
 
         }
         if (val3 !== "" && val3 === val5 && val5 === val7) {
-            return alert(whowin + " win") & setvisible(true);
+            return alert2(whowin + " win")
 
         } if (count === 8) {
-            return alert("Match Draw") & setvisible(true);
+            return alert2("Match Draw")
         }
         else {
             setcount(count + 1);
@@ -101,11 +105,11 @@ const Main = ({ setvisible, room, socket }) => {
     socket.on("receive_chat", (res) => {
         const { data } = res;
         console.log(data);
-       return SetMessages([...message,data]);
+        return SetMessages([...message, data]);
     });
     socket.on('disconnect', () => {
-        alert("user disconnected");
-        setvisible(true);
+        alert2("user disconnected");
+        // setvisible(true);
     });
 
     socket.on('room_members', (data) => {
@@ -114,8 +118,8 @@ const Main = ({ setvisible, room, socket }) => {
             setwating(false);
             console.log(data.output);
             data?.output?.forEach((element, index) => {
-                if (element !== id) {
-                    setopponent(element);
+                if (element.uid !== id) {
+                    setopponent(element.Name);
                 } else {
                     if (index === 0) {
                         setuserval("X");
@@ -128,14 +132,14 @@ const Main = ({ setvisible, room, socket }) => {
                 }
             })
         } else if (data.output.length === 0) {
-            alert("room is already full , Please Join another room",);
-            return setvisible(true);
+            return alert2("room is already full , Please Join another room");
+            // return setvisible(true);
         }
         else if (data.output.length === 1) {
             setuserval("X");
         }
     });
- 
+
     socket.on("receive_message", (res) => {
         const { data } = res;
         // console.log(id,chance,board,userval);
@@ -165,31 +169,44 @@ const Main = ({ setvisible, room, socket }) => {
         }
     });
 
-
     // useEffect(() => {
-    
-      
 
-       
-     
+
+
+
+
     //     // eslint-disable-next-line
     // }, [socket]);
+    // console.log(opponent);
 
     return (
-        <div className='main2'>
-            <div className='center2'>
-                <div style={{ display: "flex", width: "100%", position: "relative" }}>
-                    <p id="userCont">You : {Name} <span id="user"></span></p>
-                    <p style={{ position: "absolute", right: 0 }} id="oppNameCont">Opponent : {waiting ? "waiting..." : opponent}<span id="oppName"></span></p>
+        <div className='main2' style={{ flexDirection: ratio > 1 ? "column" : "row" }}>
+            <div className='center2' >
+                <div style={{ display: "flex", justifyContent: 'space-between', width: "100%" }}>
+                    <span id="userCont" style={{ margin: '2%' }} >You : {Name} <span id="user"></span></span>
+                    <span style={{ margin: '2%' }} id="oppNameCont">Opponent : {waiting ? "waiting..." : opponent}<span id="oppName"></span></span>
 
                 </div>
                 <br />
+
                 <p id="valueCont">You are playing in {room} as {userval}<span id="value"></span></p>
                 <br />
-                <div className="center">
+                <div className="center"  >
 
                     {!waiting && <p id="whosTurn">{chance}'s Turn</p>}
+                    <Oval
+                        height={30}
+                        width={30}
+                        color="white"
+                        // wrapperStyle={{}}
+                        // wrapperClass=""
+                        visible={waiting}
+                        ariaLabel='oval-loading'
+                        secondaryColor="blue"
+                        strokeWidth={2}
+                        strokeWidthSecondary={2}
 
+                    />
                     {waiting ?
                         <h2>waiting for opponent...</h2>
                         :
@@ -209,34 +226,48 @@ const Main = ({ setvisible, room, socket }) => {
                     }
                 </div>
             </div>
-
-            <div className='chatpannel'>
-                {message.length===0 && <div className='center placeholder'> Start Chatting ◔</div> }
+            <div className='chatpannel' style={{ height: ratio > 1 ? "30vh" : "80vh" }}>
                 <div className='chatbox'>
+                    {message.length === 0 && <div className='placeholder'> Start Chatting ◔</div>}
                     <div className='messagebox'>
-                        {       
+                        {
                             message.map((e) => {
-                                console.log(e.user,id,e.user!=id?"left":"right" );
+                                console.log(e.user, id, e.user != id ? "left" : "right");
                                 return (
-                                  
+
                                     <div className='messagecontainer' >
-                                        <div className='messages' style={{ textAlign: e.user!=id ?"left":"right" }}>
+                                        <div className='messages' style={{ textAlign: e.user != id ? "left" : "right" }}>
                                             {e?.message}
                                         </div>
                                     </div>
-                                    
+
                                 )
                             })
                         }
 
                     </div>
-                    
+
                 </div>
-              {!waiting &&  <div className='messageinput'>
+                {/* <hr/> */}
+                {!waiting && <div className='messageinput'>
                     <input className='textmsg' placeholder='message..' value={textmessage} onChange={(e) => settextmessage(e.target.value)} type="text" />
-                    <button className='button1'  onClick={sendchat}>Send</button>
+                    <button className='button1' onClick={sendchat}>Send</button>
                 </div>}
+
+
             </div>
+            {displaydata && <div className='alert2 center'>
+                <div className='alert2box center'>
+                    <div>
+                        {
+                            displaydata
+                        }
+                    </div>
+
+                    <button className='button1 alert2button' onClick={() => setvisible(true)}>ok</button>
+                </div>
+            </div>
+            }
 
         </div>
     )

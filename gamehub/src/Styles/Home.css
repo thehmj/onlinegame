@@ -1,8 +1,10 @@
+
 .center{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    /* border: 1px solid black; */
     /* width: 80%; */
 }
 .center2{
@@ -10,7 +12,14 @@
     flex-direction: column;
     align-items: center;
     /* justify-content: center; */
-    width: 80%;
+    min-width: 60%;
+    height: 100%;
+     min-height: 80vh;
+    margin: 3px;
+    overflow-y:auto;
+    padding: 20px;
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.411);
+    /* margin:0 20px; */
 }
 
 
@@ -51,14 +60,19 @@ button {
 }
 .main2{
     display: flex;
-    flex-wrap: wrap;
-    /* grid-template-columns: repeat(auto-fill, 900px); */
+    /* flex-wrap: wrap; */
+    justify-content:space-around;
 }
 .chatpannel{
-    flex: 1;
+    /* flex: 1; */
+    min-width: 20%;
     display: flex;
     flex-direction: column;
-    border-left: 1px solid black;
+    /* justify-content: center; */
+    /* border: 1px solid black; */
+    margin: 3px;
+    border-radius: 25px;
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.574);
 
 }
 .placeholder{
@@ -66,15 +80,22 @@ button {
     height: 100%;
     font-weight:500;
     font-family: cursive;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
     
 }
 .chatbox{
     position: relative;
+    /* width: 100%; */
     height: 80vh;  
-    border-bottom: 1px solid ;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.153) ;
 }
 .messagebox{
  width: 100%;
+ overflow-wrap:break-word;
+ overflow-y:auto;
  /* border: 1px solid blue; */
  position: absolute;
  /* display: flex; */
@@ -134,8 +155,6 @@ button {
     padding: 6px;
     position: absolute;
     bottom: 0;
-
-
     background-color: rgb(15, 180, 15);
     color:  rgb(22, 6, 6);
     font-size: larger;
@@ -143,4 +162,22 @@ button {
     border: none;
     border-radius: 12px;
     align-self: center;
+}
+.alert2{
+    position: absolute;
+    width: 100vw;
+    height:100vh;
+    background-color:rgba(128, 128, 128, 0.578);
+}
+.alert2box{
+    min-width: 50%;
+    height: 50vh;
+    font-family: cursive;
+    background-color: gray;
+
+}
+.alert2button{
+ width: 30%;
+    margin: 5%;
+
 }

@@ -22,6 +22,7 @@ app.use(cors());
 const io = new Server(server, {
     cors: {
         origin: "https://onlinegame-zrsv.onrender.com",
+        // origin: "http://localhost:3000",
         methods: ["GET", "POST"]
     },
 });
@@ -29,18 +30,10 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
     console.log("connected with ", socket.id);
     socket.on("join_room", async (data) => {
-       const uid = await middleware(data.token);
-        const output = await roomupload(data,uid);
-        var chance = "";
-        console.log(output);
+       const {uid,Name} = await middleware(data.token);
+        const output = await roomupload(data,uid,Name);
         if (output.length !== 0) {
             socket.join(data.room);
-
-            if (output.length === 1) {
-                chance = "X"
-            } else {
-                chance = "O"
-            }
             io.to(data.room).emit("room_members", { output });
         } else {
             io.to(socket.id).emit("room_members", { output });
@@ -89,20 +82,20 @@ async function gameupload(data) {
         console.log(error.message);
     }
 }
-async function roomupload(data,uid) {
+async function roomupload(data,uid,Name) {
     try {
         const a = await Rooms.findOne({ roomName: data.room });
         if (!a) {
             const b = await new Rooms({
                 roomName: data.room,
-                users: [uid]
+                users: [{uid,Name}]
             })
             await b.save();
-            return [uid];
+            return [{uid,Name}];
         }
         else {
             if (a.users.length == 1) {
-                await a.users.push(uid);
+                await a.users.push({uid,Name});
 
                 await a.save();
                 return a.users;
@@ -122,9 +115,9 @@ async function middleware(token) {
     const isuserexist = await Users.findOne({_id:isverifeduser.id});
     console.log(isuserexist._id);
     if (isuserexist) {
-        return isuserexist._id;
+        return {uid: isuserexist._id, Name: isuserexist.Name};
     }else{
-        return "";
+        return {};
     }
   } catch (error) {
     console.log(error.message,error);

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Oval } from "react-loader-spinner";
 import '../Styles/Signin.css'
 import logoimg from '../asset/game.png'
-const Signin = () => {
+const Signin = ({url}) => {
   const [email, setemail] = useState("");
   const [Name, setName] = useState("");
   const [password, setpassword] = useState("");
@@ -13,12 +13,13 @@ const Signin = () => {
 
 
   const navigate = useNavigate();
+
   const submit = async(e) => {
-    e.preventDefault();
+   e.preventDefault();
    try {
     console.log(e,password,Name,email);
     setvisible(true);
-    const res = await fetch("https://backend-of-game.onrender.com/api/signup",{
+    const res = await fetch(`${url}/api/signup`,{
       method:"Post",
       headers:{
         'Content-Type':"application/json"
@@ -45,7 +46,7 @@ const Signin = () => {
     e.preventDefault();
    try {
     setvisible(true);
-    const res = await fetch("https://backend-of-game.onrender.com/api/login",{
+    const res = await fetch(`${url}/api/login`,{
       method:"Post",
       headers:{
         'Content-Type':"application/json"
